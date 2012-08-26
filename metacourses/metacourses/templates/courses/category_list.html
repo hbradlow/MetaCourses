@@ -1,0 +1,21 @@
+{% extends "courses/base.html" %}
+{% load course_tags %}
+ 
+{% block head_title %}
+    Categories
+{% endblock %}
+
+{% block body %}
+    {% split_list object_list as chunked_objects 3 %}
+    {% for chunk in chunked_objects %}
+        <div class="row">
+            {% for category in chunk %}
+                <div class="span4">
+                    <strong>
+                        <a href="{% url filter_by_category category.slug %}">{{category|title}}</a>
+                    </strong>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% endblock %}

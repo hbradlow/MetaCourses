@@ -1,0 +1,16 @@
+{% extends "search/base.html" %}
+{% load course_tags %}
+
+{% block body %}
+    <h2>Search Results</h2>
+    {% split_list page as chunked_list 3 %}
+    {% for chunk in chunked_list %}
+        <div class="row">
+            {% for result in chunk %}
+                <div class="span4 well">
+                    {% course result.object %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+{% endblock %}

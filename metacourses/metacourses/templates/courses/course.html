@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="span1"></div>
+    <div class="{% if course.image_url %}span5{% else %}span11{% endif %}">
+        <a href="{{course.link}}">
+            <h3>{{course.title}}</h3>
+        </a>
+        <a href="{% url filter_by_school course.school.slug %}"><h4>{{course.school|title}}</h4></a>
+        <p>
+            Categories:
+            {% for category in course.categories.all %}
+                <strong>
+                    <a href="{% url filter_by_category category.slug %}">{{category|title}}</a>
+                </strong>
+                {% if not forloop.last %}
+                ,
+                {% endif %}
+            {% endfor %}
+        </p>
+        <p>
+            Materials:
+            {% for material in course.materials.all %}
+                <strong>
+                    <a href="{% url filter_by_materials material.slug %}">{{material|title}}</a>
+                </strong>
+                {% if not forloop.last %}
+                ,
+                {% endif %}
+            {% endfor %}
+        </p>
+    </div>
+    {% if course.image_url %}
+        <div class="span6">
+            <a href="{{course.link}}">
+                <img src="{{course.image_url}}">
+            </a>
+        </div>
+    {% endif %}
+</div>

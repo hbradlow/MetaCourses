@@ -1,0 +1,15 @@
+{% load endless %}
+{% load course_tags %}
+
+{% paginate courses %}
+{% split_list courses as chunked_courses 3 %}
+{% for chunk in chunked_courses %} 
+    <div class="row">
+        {% for course in chunk %}
+            <div class="span4 well">
+                {% course course %}
+            </div>
+        {% endfor %}
+    </div>
+{% endfor %}
+{% show_more %}

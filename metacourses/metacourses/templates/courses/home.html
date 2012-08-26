@@ -1,0 +1,24 @@
+{% extends "courses/base.html" %}
+{% load static %}
+
+{% block head_title %}
+    {% if page_title %}
+        {{page_title|title}}
+    {% else %}
+        All Courses
+    {% endif %}
+{% endblock %}
+
+{% block extra_script %}
+    {{ block.super }}
+    <script src="{% static "endless_pagination/js/endless.js" %}" type="text/javascript" charset="utf-8"></script>
+    <script src="{% static "endless_pagination/js/endless_on_scroll.js" %}" type="text/javascript" charset="utf-8"></script>
+{% endblock %}
+
+
+{% block body %}
+    {% if page_title %}
+        <h2>{{page_title|title}}</h2>
+    {% endif %}
+    {% include page_template %}
+{% endblock %}

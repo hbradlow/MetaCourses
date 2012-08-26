@@ -1,0 +1,9 @@
+<div class="well sidebar-nav">
+    <ul class="nav nav-list">
+        <li class="nav-header">Categories</li>
+        <!--li class="active"><a href="#">Link</a></li-->
+        {% for category in categories %}
+        <li {% if category == active_category %}class="active"{% endif %}><a href="{% url filter_by_category category.slug %}">{{category|title}}</a></li>
+        {% endfor %}
+    </ul>
+</div>

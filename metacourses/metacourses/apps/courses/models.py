@@ -8,16 +8,25 @@ class School(models.Model):
     slug = AutoSlugField(populate_from="name",unique=True)
     def __unicode__(self):
         return self.name
+    @permalink
+    def get_absolute_url(self):
+        return ("filter_by_school",[self.slug])
 class Category(models.Model):
     name = models.CharField(max_length=200)
     slug = AutoSlugField(populate_from="name",unique=True)
     def __unicode__(self):
         return self.name
+    @permalink
+    def get_absolute_url(self):
+        return ("filter_by_category",[self.slug])
 class Material(models.Model):
     name = models.CharField(max_length=200)
     slug = AutoSlugField(populate_from="name",unique=True)
     def __unicode__(self):
         return self.name
+    @permalink
+    def get_absolute_url(self):
+        return ("filter_by_materials",[self.slug])
 class Course(models.Model):
     types = [
             ("edx","edX"),

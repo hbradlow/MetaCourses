@@ -86,7 +86,7 @@ TEMPLATE_LOADERS = (
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS
 TEMPLATE_CONTEXT_PROCESSORS += (
     'django.core.context_processors.request',
-    'courses.context_processors.categories',
+    'courses.context_processors.filters',
 )
 
 MIDDLEWARE_CLASSES = (

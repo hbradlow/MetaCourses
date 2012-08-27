@@ -1,6 +1,7 @@
 {% load staticfiles %}
 {% load i18n %}
 {% load url from future %}
+{% load course_tags %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
     <head>
@@ -72,9 +73,69 @@
                             <div class="nav-collapse">
                                 {% block nav %}
                                     <ul class="nav">
-                                        <li><a href="{% url "categories" %}">Categories</a></li>
-                                        <li><a href="{% url "schools" %}">Schools</a></li>
-                                        <li><a href="{% url "materials" %}">Materials</a></li>
+                                        {% split_list categories as chunked_categories 3 %}
+                                        {% split_list schools as chunked_schools 3 %}
+                                        {% split_list materials as chunked_materials 3 %}
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#">Categories</a>
+                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                <li>
+                                                    <div class="span9">
+                                                        {% for chunk in chunked_categories %}
+                                                            <div class="row">
+                                                                {% for category in chunk %}
+                                                                    <div class="span3">
+                                                                        <a style="white-space:normal;" href="{{category.get_absolute_url}}">
+                                                                            {{category|title}}
+                                                                        </a>
+                                                                    </div>
+                                                                {% endfor %}
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#">Materials</a>
+                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                <li>
+                                                    <div class="span9">
+                                                        {% for chunk in chunked_materials %}
+                                                            <div class="row">
+                                                                {% for material in chunk %}
+                                                                    <div class="span3">
+                                                                        <a style="white-space:normal;" href="{{material.get_absolute_url}}">
+                                                                            {{material|title}}
+                                                                        </a>
+                                                                    </div>
+                                                                {% endfor %}
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#">Schools</a>
+                                            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                <li>
+                                                    <div class="span9">
+                                                        {% for chunk in chunked_schools %}
+                                                            <div class="row">
+                                                                {% for school in chunk %}
+                                                                    <div class="span3">
+                                                                        <a style="white-space:normal;" href="{{school.get_absolute_url}}">
+                                                                            {{school|title}}
+                                                                        </a>
+                                                                    </div>
+                                                                {% endfor %}
+                                                            </div>
+                                                        {% endfor %}
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </li>
                                     </ul>
                                 {% endblock %}
                                 {% block search_bar %}{% include "_searchbar.html" %}{% endblock %}
